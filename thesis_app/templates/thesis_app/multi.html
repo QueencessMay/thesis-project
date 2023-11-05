@@ -1,0 +1,21 @@
+{% extends "thesis_app/base.html" %}
+{% load static %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'thesis_app/css/multi.css' %}" />
+{% endblock stylesheet %}
+{% block subtitle %}Multiple Sentiment{% endblock subtitle %}
+
+{% block content %}
+<div class="wrapper ani-default">
+    <div id="container">
+        <form method="POST" action="{% url 'multiple' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <textarea name="textarea_input" placeholder="Enter your review here...">{{ user_input }}</textarea>
+            <button type="submit"><img src="{% static 'thesis_app/images/submit.png' %}" /></button>
+        </form>
+        <div class="result">
+        </div>
+    </div>
+</div>
+{% endblock content %}

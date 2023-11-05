@@ -1,0 +1,91 @@
+:root {
+    --main-blue: #A0C6FC;
+    --dark-blue: #354254;
+}
+
+*, *:before, *:after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+li, a {
+    text-decoration: none;
+    color: black;
+}
+
+button {
+    border: none;
+}
+
+/* Main */
+
+body {
+    background-color: #DEE6F2;
+}
+
+[name^="chat"] {
+    font-size: 2.5rem;
+    color: white;
+}
+
+#sidebar {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+#sidebar li a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: var(--main-blue);
+    padding: 1rem;
+}
+#sidebar li:first-child a {
+    border-radius: 0 1rem 0 0;
+}
+#sidebar li:last-child a {
+    border-radius: 0 0 1rem 0;
+}
+#sidebar li:hover a {
+    background-color: var(--dark-blue);
+}
+#sidebar li:hover a::before,
+#sidebar li:hover a::after {
+    --curve: 2rem;
+    content: "";
+    position: absolute;
+    width: var(--curve);
+    height: var(--curve);
+    border-radius: 50%;
+    background-color: transparent;
+    z-index: 101;
+}
+#sidebar li:hover a::before {
+    top: calc(-1 * var(--curve));
+    left: 0;
+    box-shadow: calc(-1 * var(--curve) * 0.5) calc(var(--curve) * 0.5) var(--dark-blue);
+}
+#sidebar li:hover a::after {
+    bottom: calc(-1 * var(--curve));
+    left: 0;
+    box-shadow: calc(-1 * var(--curve) * 0.5) calc(-1 * var(--curve) * 0.5) var(--dark-blue);
+}
+#sidebar li a .icon-text {
+    display: none;
+}
+#sidebar li:hover a .icon-text {
+    display: block;
+    position: absolute;
+    left: 3.5rem;
+    padding: 1.65rem;
+    width: max-content;
+    background-color: var(--dark-blue);
+    color: white;
+    border-radius: 0 1rem 1rem 0;
+}

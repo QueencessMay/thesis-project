@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'thesis_app/css/styles.css' %}" />
+    <title>Game Reviews Analyzer</title>
+</head>
+
+<body class="app col-1">
+    <!-- RESULTS -->
+    <div class="results-container hide">
+        <!-- Display the result if it exists -->
+        {% if result %}
+        <h2 class="">{{ result|capfirst }} Review</h2>
+        {% if result == "positive" %}
+        <img class="positive-img" src="{% static 'thesis_app/images/positive.png' %}"/> 
+        {% elif result == "negative" %}
+        <img class="negative-img" src="{% static 'thesis_app/images/negative.png' %}"/> 
+        <!-- Maglagay ng error image -->
+        {% endif %}
+        {% else %}
+        <!-- Display the image after opening -->
+        <!-- <img class="start" src="https://scontent.fmnl4-3.fna.fbcdn.net/v/t1.15752-9/362621056_567177988751640_983384748221933740_n.png?_nc_cat=110&ccb=1-7&_nc_sid=ae9488&_nc_eui2=AeGANaYMx5i4jvp_enDtff6rEUvoNbj8FmkRS-g1uPwWaUyzB5QeF4oQg_BOdXnItO1tf4d49vkvZcKIW0ZLu5QB&_nc_ohc=Y0DsVZhaEhsAX9TcUXs&_nc_ht=scontent.fmnl4-3.fna&oh=03_AdSqBLA93EodTnEOuuy1crY2GaVNUa-khPWgZqK9Slajvw&oe=64E178D6"/> -->
+        {% endif %}
+    </div>
+
+    <form class="input-container" method="POST" action="{% url 'home' %}">
+        {% csrf_token %}
+        <h1 class="title">Sentiment<br/>Analyzer</h1>
+        <p>Enter a comment and we will let you know if it is<br/>POSITIVE or NEGATIVE</p>
+        <div class="input-field">
+            <ion-icon name="chatbox-outline"></ion-icon>
+            <!-- Display the form input field -->
+            <input type="text" name="input" placeholder="Enter a comment"></input>
+        </div>
+        <button type="submit">Analyze</button>
+    </form>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons/dist/ionicons.js"></script>
+</body>  
+</html>
