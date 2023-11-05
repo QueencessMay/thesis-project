@@ -1,0 +1,18 @@
+.wrapper {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-blue);
+}
+
+#container {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 1rem;
+    padding: 5vw;
+    width: 50vw;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+}

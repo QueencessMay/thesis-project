@@ -1,0 +1,136 @@
+.wrapper {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-blue);
+}
+
+#container {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 1rem;
+    padding: 5vw;
+    width: 70vw;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    gap: 5vw;
+}
+.title__content {
+    flex: 1;
+    text-align: center;
+}
+
+#result__icon {
+    width: auto;
+    height: 20vh;
+    border-radius: 50%;
+}
+#result__title {
+    font: 3rem/1.25 Bungee, sans-serif;
+}
+
+.result__rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+.result__rating .bar {
+    flex: 1;
+    height: 0.5rem;
+    border-radius: 0.25rem;
+    /* transition: background 1s; */
+}
+
+.rating__icon {
+    border-radius: 50%;
+    padding: 0.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+}
+.rating__icon:first-child {
+    background-color: var(--dark-pos);
+}
+.rating__icon:last-child {
+    background-color: var(--dark-neg);
+}
+
+.content {
+    position: relative;
+    flex: 1;
+}
+.content textarea {
+    position: absolute;
+    padding: 1.25rem;
+    height: 100%;
+    width: 100%;
+    border-radius: 1rem;
+    font: 1rem/1.25 'Open Sans', sans-serif;
+}
+.content button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 100;
+    width: 2.8rem;
+    height: 2.8rem;
+    background-color: var(--main-blue);
+    border-radius: 50%;
+    padding: 0.5rem;
+    transition: background-color 0.25s ease-in-out;
+}
+.content button:hover {
+    background-color: var(--dark-blue);
+}
+
+.text-default {
+    color: var(--dark-blue);
+}
+.text-pos {
+    color: var(--dark-pos);
+}
+.text-neg {
+    color: var(--dark-neg);
+}
+
+@keyframes toPos {
+    50% { background-color: var(--bg-blue); }
+    100% { background-color: var(--bg-pos); }
+}
+@keyframes toNeg {
+    50% { background-color: var(--bg-blue); }
+    100% { background-color: var(--bg-neg); }
+}
+.ani-pos {
+    animation: toPos 0.35s forwards;
+}
+.ani-neg {
+    animation: toNeg 0.35s forwards;
+}
+
+.border-default {
+    border: 8px solid var(--bg-blue);
+}
+.border-pos {
+    border: 8px solid var(--bg-pos);
+}
+.border-neg {
+    border: 8px solid var(--bg-neg);
+}
+
+.bar-default {
+    background: linear-gradient(to right, var(--dark-pos), var(--dark-blue), var(--dark-neg));
+}
+.bar-pos {
+    background: var(--dark-pos);
+}
+.bar-neg {
+    background: var(--dark-neg);
+}

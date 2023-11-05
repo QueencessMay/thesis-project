@@ -1,6 +1,11 @@
 :root {
     --main-blue: #A0C6FC;
+    --bg-blue: #DEE6F2;
+    --bg-pos: #D0F0C0;
+    --bg-neg: #ffbaba;
     --dark-blue: #354254;
+    --dark-pos: #006A4E;
+    --dark-neg: #a70000;
 }
 
 *, *:before, *:after {
@@ -18,14 +23,26 @@ li, a {
     color: black;
 }
 
+input, textarea {
+    resize: none;
+    border: none;
+    outline: none;
+}
+
 button {
     border: none;
+    cursor: pointer;
+}
+
+img {
+    width: 100%;
+    height: 100%;
 }
 
 /* Main */
 
 body {
-    background-color: #DEE6F2;
+    background: var(--bg-blue);
 }
 
 [name^="chat"] {
@@ -87,5 +104,14 @@ body {
     width: max-content;
     background-color: var(--dark-blue);
     color: white;
+    font: 0.9rem/1.25 'Open Sans', sans-serif;
     border-radius: 0 1rem 1rem 0;
+}
+
+@keyframes toDefault {
+    50% { background-color: rgba(255, 255, 255, 0.5); }
+    100% { background-color: var(--bg-blue); }
+}
+.ani-default {
+    animation: toDefault 0.35s forwards;
 }
