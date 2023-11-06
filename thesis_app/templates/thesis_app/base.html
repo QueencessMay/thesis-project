@@ -14,6 +14,8 @@
 </head>
 
 <body>
+    {% comment %}
+    Hide muna ito
     <nav id="sidebar">
         <ul>
             <li><a href="{% url "single" %}">
@@ -25,7 +27,8 @@
                 <div class="icon-text">Analyze Multiple Game Reviews</div>
             </a></li>
         </ul>
-    </nav>
+    </nav> 
+    {% endcomment %}
 
     {% block content %}{% endblock content %}
 
