@@ -14,7 +14,7 @@
     min-height: 80vh;
     display: flex;
     flex-direction: column;
-    gap: 1vw;
+    gap: 2vw;
 }
 
 .title {
@@ -25,6 +25,7 @@
 .title__content {
     flex: 1;
     text-align: center;
+    width: 100%;
 }
 
 #result__icon {
@@ -46,7 +47,6 @@
     flex: 1;
     height: 0.5rem;
     border-radius: 0.25rem;
-    /* transition: background 1s; */
 }
 
 .rating__icon {
@@ -133,4 +133,20 @@
 }
 .bar-neg {
     background: var(--dark-neg);
+}
+
+@media (max-width: 768px) {
+    #container {
+        width: 78vw;
+    }
+    .title {
+        flex-direction: column;
+        gap: 3vw;
+    }
+    #result__icon {
+        height: 16vh;
+    }
+    #result__title {
+        font-size: 2rem;
+    }
 }
