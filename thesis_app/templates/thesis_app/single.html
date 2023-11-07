@@ -33,9 +33,13 @@
         <div class="content">
             <form method="POST" action="{% url 'single' %}">
                 {% csrf_token %}
-                <textarea name="textarea_input" placeholder="Enter your review here...">{{ user_input }}</textarea>
-                <button type="submit"><img src="{% static 'thesis_app/images/submit.png' %}" /></button>
+                <div class="textarea-container">
+                    <textarea class="textarea-emoji" id="text_input" name="textarea_input" placeholder="Enter your review here...">{{ user_input }}</textarea>
+                </div>
+                <button id="submit-button" type="submit"><img src="{% static 'thesis_app/images/submit.png' %}" /></button>
             </form>
+            <!-- Emoji Picker -->
+            <button class="toggle-emoji"><ion-icon name="happy-outline"></ion-icon></button>
         </div>
     </div>
 </div>
