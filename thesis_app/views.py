@@ -3,6 +3,7 @@ from django.shortcuts import render
 from .forms import CSVForm
 import tensorflow as tf
 from transformers import DistilBertTokenizerFast, TFDistilBertForSequenceClassification
+from . import Preprocessing
 
 # Analyze sentiment of one game review with or without emojis and emoticons
 
@@ -28,7 +29,8 @@ def view_single_with(request):
     model = TFDistilBertForSequenceClassification.from_pretrained(path)
 
     text_input = request.POST.get('textarea_input', '')
-    text_output = analyze_single(text_input, model)
+    text_input_preprocessed = Preprocessing.preprocess_text(text_input)
+    text_output = analyze_single(text_input_preprocessed, model)
 
     context = {
       'result': text_output,
