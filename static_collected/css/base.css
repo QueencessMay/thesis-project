@@ -45,7 +45,7 @@ body {
     background: var(--bg-blue);
 }
 
-[name^="chat"] {
+.menu-icon {
     font-size: 2.5rem;
     color: white;
 }
@@ -54,7 +54,7 @@ body {
     position: fixed;
     top: 50%;
     transform: translateY(-50%);
-    z-index: 10;
+    z-index: 1001;
 }
 #sidebar li a {
     position: relative;
@@ -81,7 +81,7 @@ body {
     height: var(--curve);
     border-radius: 50%;
     background-color: transparent;
-    z-index: 101;
+    z-index: 1002;
 }
 #sidebar li:hover a::before {
     top: calc(-1 * var(--curve));

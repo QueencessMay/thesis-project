@@ -5,33 +5,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Open+Sans:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <!-- Emoji Picker -->
+    <link rel="stylesheet" href="{% static "thesis_app/css/emoji.css" %}" />
+    <!-- Base Stylesheet -->
     <link rel="stylesheet" href="{% static 'thesis_app/css/base.css' %}" />
     {% block stylesheet %}{% endblock stylesheet %}
     <title>{% block subtitle %} Home {% endblock subtitle %}- Game Reviews Analyzer</title>
 </head>
 
 <body>
-    {% comment %}
-    Hide muna ito
     <nav id="sidebar">
         <ul>
-            <li><a href="{% url "single" %}">
-                <ion-icon name="chatbubble-outline"></ion-icon>
-                <div class="icon-text">Analyze One Game Review</div>
+            <li><a href="{% url 'single_without' %}">
+                <ion-icon name="chatbubble-outline" class="menu-icon"></ion-icon>
+                <div class="icon-text">Analyze Game Review without Emoji and Emoticon</div>
             </a></li>
-            <li><a href="{% url "multiple" %}">
-                <ion-icon name="chatbubbles-outline"></ion-icon>
+            <li><a href="{% url 'single_with' %}">
+                <ion-icon name="happy-outline" class="menu-icon"></ion-icon>
+                <div class="icon-text">Analyze Game Review with Emoji and Emoticon</div>
+            </a></li>
+            <li><a href="{% url 'multiple' %}">
+                <ion-icon name="chatbubbles-outline" class="menu-icon"></ion-icon>
                 <div class="icon-text">Analyze Multiple Game Reviews</div>
             </a></li>
         </ul>
     </nav> 
-    {% endcomment %}
 
     {% block content %}{% endblock content %}
 
+    <!-- Emoji Picker -->
+    <script src="{% static "thesis_app/js/emoji-popover.iife.js" %}"></script>
+    <script src="{% static "thesis_app/js/emoji.js" %}"></script>
+    <!-- Icons -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons/dist/ionicons.js"></script>
 </body>

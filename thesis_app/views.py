@@ -3,29 +3,66 @@ from django.shortcuts import render
 from .forms import CSVForm
 import tensorflow as tf
 from transformers import DistilBertTokenizerFast, TFDistilBertForSequenceClassification
-import random
 
-# tokenizer = DistilBertTokenizerFast.from_pretrained('distilbert-base-uncased')
-# model_path = 'FiouReia/beshybert'
-# beshybert = TFDistilBertForSequenceClassification.from_pretrained(model_path)
+# Analyze sentiment of one game review with or without emojis and emoticons
 
-def single(request):
+def view_single_without(request):
   if request.method == "POST":
+    path = 'FiouReia/distilbert-uncased-without-emojis-emoticons'
+    model = TFDistilBertForSequenceClassification.from_pretrained(path)
+
     text_input = request.POST.get('textarea_input', '')
-    text_output = analyze_single_sentiment(text_input)
+    text_output = analyze_single(text_input, model)
+
     context = {
       'result': text_output,
       'user_input': text_input,
     }
-    return render(request, 'thesis_app/single.html', context)
+    return render(request, 'thesis_app/single-without.html', context)
   else:
-    return render(request, 'thesis_app/single.html')
+    return render(request, 'thesis_app/single-without.html')
+
+def view_single_with(request):
+  if request.method == "POST":
+    path = 'FiouReia/distilbert-uncased-with-emojis-emoticons'
+    model = TFDistilBertForSequenceClassification.from_pretrained(path)
+
+    text_input = request.POST.get('textarea_input', '')
+    text_output = analyze_single(text_input, model)
+
+    context = {
+      'result': text_output,
+      'user_input': text_input,
+    }
+    return render(request, 'thesis_app/single-with.html', context)
+  else:
+    return render(request, 'thesis_app/single-with.html')
+  
+def analyze_single(input, model):
+  if not input:
+    return -1
+  tokenizer = DistilBertTokenizerFast.from_pretrained('distilbert-base-uncased')
+  inputs = tokenizer(input, return_tensors="tf")
+  outputs = model(inputs)
+  sentiment = tf.argmax(outputs.logits, axis=1).numpy()[0]
+  return sentiment
+
+# Analyze sentiment of multiple game reviews with or without emojis and emoticons
 
 def multi(request):
   if request.method == 'POST':
     form = CSVForm(request.POST, request.FILES)
+
     if form.is_valid():
       file_input = request.FILES['csv']
+
+      # if file_input:
+      #   if file_input.name.endswith('.csv'):
+      #     try:
+      #       csv.reader(file_input)
+      #     except csv.Error:
+      #       return render(request, "thesis_app/multi.html", { 'isError': True })
+
       file_output = analyze_multiple_sentiment(file_input)
       context = {
         'num_positive': file_output['num_positive'],
@@ -36,18 +73,12 @@ def multi(request):
     form = CSVForm()
   return render(request, "thesis_app/multi.html", { 'form': form })
 
-def home(request):
-  return single(request)
-
-# Baguhin tong mga functions
 def analyze_multiple_sentiment(file):
-  # Insert our amazing sentiment analyzer here + File Reader XD
   results = {
     'num_positive': 5,
     'num_negative': 5,
-  } # Nagbabago or smth
+  } 
   return results 
 
-def analyze_single_sentiment(input):
-  # Insert our amazing sentiment analyzer here
-  return random.choice([-1, 1]) # Number na lang ireturn nyo ah: 1 Positive, -1 Negative, 0 Default
+def home(request):
+  return view_single_without(request)
