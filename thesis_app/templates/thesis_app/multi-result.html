@@ -11,12 +11,8 @@
     <div id="container">
         <form class="uploader-container" method="POST" action="{% url 'multiple' %}" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ form.csv.label_tag }}
-            <div class="uploader">{{ form.csv }}</div>
-            <button type="submit"><img src="{% static 'thesis_app/images/upload.png' %}" />Analyze</button>
+            <button type="submit"><img src="{% static 'thesis_app/images/upload.png' %}" />Download CSV</button>
         </form>
-        <div class="result">
-        </div>
     </div>
 </div>
 {% endblock content %}

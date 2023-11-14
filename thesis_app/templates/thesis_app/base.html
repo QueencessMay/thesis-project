@@ -20,12 +20,16 @@
 <body>
     <nav id="sidebar">
         <ul>
-            <li><a href="{% url "single" %}">
-                <ion-icon name="chatbubble-outline"></ion-icon>
-                <div class="icon-text">Analyze One Game Review</div>
+            <li><a href="{% url 'single_without' %}">
+                <ion-icon name="chatbubble-outline" class="menu-icon"></ion-icon>
+                <div class="icon-text">Analyze Game Review without Emoji and Emoticon</div>
             </a></li>
-            <li><a href="{% url "multiple" %}">
-                <ion-icon name="chatbubbles-outline"></ion-icon>
+            <li><a href="{% url 'single_with' %}">
+                <ion-icon name="happy-outline" class="menu-icon"></ion-icon>
+                <div class="icon-text">Analyze Game Review with Emoji and Emoticon</div>
+            </a></li>
+            <li><a href="{% url 'multiple' %}">
+                <ion-icon name="chatbubbles-outline" class="menu-icon"></ion-icon>
                 <div class="icon-text">Analyze Multiple Game Reviews</div>
             </a></li>
         </ul>

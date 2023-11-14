@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
   path('', views.home, name="home"),
-  path('single-sentiment/', views.single, name="single"),
-  path('multiple-sentiment/', views.multi, name="multiple"),
+  path('single/with-emoji-and-emoticon', views.view_single_with, name="single_with"),
+  path('single/without-emoji-and-emoticon', views.view_single_without, name="single_without"),
+  path('multiple/', views.multi, name="multiple"),
 ]
