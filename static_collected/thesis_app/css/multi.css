@@ -10,7 +10,7 @@
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 1rem;
     padding: 3vw;
-    width: 60vw;
+    width: 70vw;
     height: max-content;
     display: flex;
     flex-direction: column;
@@ -18,7 +18,7 @@
 }
 
 label {
-    font: 1.75rem/1.25 Bungee, sans-serif;
+    font: 2.5rem/1 Bungee, sans-serif;
 }
 
 .uploader {

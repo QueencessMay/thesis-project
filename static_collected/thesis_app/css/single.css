@@ -4,6 +4,7 @@
     justify-content: center;
     align-items: center;
     background-color: var(--bg-blue);
+    overflow: hidden;
 }
 
 #container {
@@ -64,23 +65,38 @@
 
 .content {
     position: relative;
+    display: flex;
+    flex-direction: column;
     flex: 1;
     height: 100%;
 }
-.content .textarea-emoji {
+.content .textarea-emoji,
+.emojionearea-editor {
+    height: 100% !important;
+    width: 100% !important;
+    border: none !important;
+    outline: none !important;
+    font: 1rem/1.25 'Open Sans', sans-serif !important;
+    flex: 1 !important;
+    z-index: 101 !important;
+    padding: 0 !important;
+}
+.textarea-container {
     position: absolute;
     padding: 1.25rem 3.25rem 1.25rem 1.25rem;
     height: 100%;
     width: 100%;
     border-radius: 1rem;
-    border: none;
-    outline: none;
-    font: 1rem/1.25 'Open Sans', sans-serif;
+    background: white;
+    cursor: typing;
+}
+.emojionearea {
+    all: unset;
 }
 .toggle-emoji {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    bottom: 5px;
+    left: 10px;
     z-index: 200;
     padding: 0.1rem;
     background-color: transparent;
@@ -92,8 +108,8 @@
     bottom: 10px;
     right: 10px;
     z-index: 100;
-    width: 2.8rem;
-    height: 2.8rem;
+    width: 2.5rem;
+    height: 2.5rem;
     background-color: var(--main-blue);
     border-radius: 50%;
     padding: 0.5rem;
@@ -164,5 +180,8 @@
     }
     .toggle-emoji {
         display: none;
+    }
+    .textarea-container {
+        padding: 1.25rem 3.25rem 1.25rem 1.25rem;
     }
 }
