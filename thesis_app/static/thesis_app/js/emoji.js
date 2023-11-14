@@ -33,6 +33,7 @@ const e1 = new EmojiPopover({
         { value: '❤️‍🩹', },
         { value: '💘', },
         { value: '❣️', },
+        { value: '❤️‍🔥', },
         { value: '💙', },
         { value: '💚', },
         { value: '🖤', },
@@ -40,6 +41,27 @@ const e1 = new EmojiPopover({
         { value: '💟', },
         { value: '🤍', },
         { value: '🤎', },
+        { value: '💝', },
+        { value: '🧡', },
+        { value: '💜', },
+
+        { value: '🫶', },
+        { value: '👎', },
+        { value: '👍', },
+        { value: '👌', },
+        { value: '✌️', },
+        { value: '✍️', },
+        { value: '👋', },
+        { value: '✋', },
+
+        { value: '💀', },
+        { value: '🔥', },
+        { value: '✨', },
+        { value: '⭐', },
+        { value: '✔️', },
+        { value: '✅', },
+        { value: '🎉', },
+        { value: '👀', },
         { value: '💝', },
         { value: '🧡', },
         { value: '💜', },
@@ -91,25 +113,30 @@ const e1 = new EmojiPopover({
         { value: '😬', },
         { value: '😮‍💨', },
         { value: '🤥', },
+        { value: '🤔', },
         { value: '🫨', },
+        { value: '🫠', },
     ]
 })
 
 const textarea = document.querySelector(".textarea-emoji");
 
-textarea.addEventListener("focus", (event) => {
-    event.preventDefault();
-});
-
 e1.onSelect(val => {
     const cursorPosition = textarea.selectionStart;
     const valToInsert = val;
     const currentValue = textarea.value;
+
+    const emojiPosition = cursorPosition;
     const updatedValue =
-        currentValue.slice(0, cursorPosition) +
+        currentValue.slice(0, emojiPosition) +
         valToInsert +
-        currentValue.slice(cursorPosition);
+        currentValue.slice(emojiPosition);
+
     textarea.value = updatedValue;
-    const newCursorPosition = cursorPosition + valToInsert.length;
+    const newCursorPosition = emojiPosition + valToInsert.length;
     textarea.setSelectionRange(newCursorPosition, newCursorPosition);
+    textarea.focus();
 });
+
+
+

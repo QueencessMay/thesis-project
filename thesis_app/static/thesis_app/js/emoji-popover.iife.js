@@ -34,7 +34,7 @@ var EmojiPopover = (function () {
       a.appendChild(n), a.appendChild(o);
       const r = document.querySelector(i),
         { left: c, top: l, height: m } = r.getClientRects()[0];
-      (a.style.top = `${l + m + 12}px`), (a.style.left = `${c}px`);
+      (a.style.top = `${l + m + 10}px`), (a.style.left = `${c}px`);
       document.querySelector(e).appendChild(a);
     }
     createButtonListener() {

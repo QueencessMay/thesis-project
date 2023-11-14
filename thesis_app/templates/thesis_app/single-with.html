@@ -4,37 +4,37 @@
 {% block stylesheet %}
 <link rel="stylesheet" href="{% static 'thesis_app/css/single.css' %}" />
 {% endblock stylesheet %}
-{% block subtitle %}Single Sentiment{% endblock subtitle %}
+{% block subtitle %}Single with Emoji and Emoticon{% endblock subtitle %}
 
 {% block content %}
-<div class="wrapper {% if result > 0 %}ani-pos{% elif result < 0 %}ani-neg{% else %}ani-default{% endif %}">
+<div class="wrapper {% if result == 1 %}ani-pos{% elif result == 0 %}ani-neg{% else %}ani-default{% endif %}">
     <div id="container">
         <div class="title">
             <!-- image -->
-            {% if result > 0 %}
+            {% if result == 1 %}
                 <img id="result__icon" class="border-pos" src="{% static 'thesis_app/images/happy.png' %}" />
-            {% elif result < 0 %}
+            {% elif result == 0 %}
                 <img id="result__icon" class="border-neg" src="{% static 'thesis_app/images/angry.png' %}" />   
             {% else %}
                 <img id="result__icon" class="border-default" src="{% static 'thesis_app/images/neutral.png' %}" />
             {% endif %}            
             <!-- end of image -->
             <div class="title__content">
-                <div id="result__title" class="{% if result > 0 %}text-pos{% elif result < 0 %}text-neg{% else %}text-default{% endif %}">
-                    {% if result > 0 %}Positive{% elif result < 0 %}Negative{% else %}Game{% endif %} Review
+                <div id="result__title" class="{% if result == 1 %}text-pos{% elif result == 0 %}text-neg{% else %}text-default{% endif %}">
+                    {% if result == 1 %}Positive{% elif result == 0 %}Negative{% else %}Game{% endif %} Review
                 </div>
                 <div class="result__rating">
                     <img class="rating__icon" src="{% static 'thesis_app/images/like.png' %}" />
-                    <div class="bar {% if result > 0 %}bar-pos{% elif result < 0 %}bar-neg{% else %}bar-default{% endif %}"></div>
+                    <div class="bar {% if result == 1 %}bar-pos{% elif result == 0 %}bar-neg{% else %}bar-default{% endif %}"></div>
                     <img class="rating__icon" src="{% static 'thesis_app/images/dislike.png' %}" />
                 </div>
             </div>
         </div>
         <div class="content">
-            <form method="POST" action="{% url 'single' %}">
+            <form id="form_emoji" method="POST" action="{% url 'single_with' %}">
                 {% csrf_token %}
                 <div class="textarea-container">
-                    <textarea class="textarea-emoji" id="text_input" name="textarea_input" placeholder="Enter your review here...">{{ user_input }}</textarea>
+                    <textarea class="textarea-emoji" id="text_input" name="textarea_input" placeholder="Enter your review WITH EMOJIS and EMOTICONS here...">{{ user_input }}</textarea>
                 </div>
                 <button id="submit-button" type="submit"><img src="{% static 'thesis_app/images/submit.png' %}" /></button>
             </form>
