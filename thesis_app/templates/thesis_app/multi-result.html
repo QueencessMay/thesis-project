@@ -8,7 +8,8 @@
 
 {% block content %}
 <div class="wrapper ani-default">
-    <div id="container">
+    <div class="wrapper__bg"></div>
+    <div class="container container--multiple">
         <form class="uploader-container" method="POST" action="{% url 'multiple' %}" enctype="multipart/form-data">
             {% csrf_token %}
             <button type="submit"><img src="{% static 'thesis_app/images/upload.png' %}" />Download CSV</button>

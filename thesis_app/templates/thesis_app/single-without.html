@@ -8,7 +8,8 @@
 
 {% block content %}
 <div class="wrapper {% if result == 1 %}ani-pos{% elif result == 0 %}ani-neg{% else %}ani-default{% endif %}">
-    <div id="container">
+    <div class="wrapper__bg"></div>
+    <div class="container container--single">
         <div class="title">
             <!-- image -->
             {% if result == 1 %}
