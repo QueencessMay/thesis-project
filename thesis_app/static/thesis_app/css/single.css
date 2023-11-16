@@ -1,20 +1,7 @@
-.wrapper {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--bg-blue);
-    overflow: hidden;
-}
-
-#container {
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 1rem;
+.container--single {
     padding: 5vw;
     width: 70vw;
     min-height: 80vh;
-    display: flex;
-    flex-direction: column;
     gap: 2vw;
 }
 
@@ -76,14 +63,14 @@
     width: 100% !important;
     border: none !important;
     outline: none !important;
-    font: 1rem/1.25 'Open Sans', sans-serif !important;
+    font: 1rem/1.25 Inter, sans-serif !important;
     flex: 1 !important;
     z-index: 101 !important;
     padding: 0 !important;
 }
 .textarea-container {
     position: absolute;
-    padding: 1.25rem 3.25rem 1.25rem 1.25rem;
+    padding: 1.25rem 1.25rem 3.25rem 1.25rem;
     height: 100%;
     width: 100%;
     border-radius: 1rem;
@@ -138,10 +125,10 @@
     100% { background-color: var(--bg-neg); }
 }
 .ani-pos {
-    animation: toPos 0.35s forwards;
+    animation: toPos 0.35s forwards ease-in-out;
 }
 .ani-neg {
-    animation: toNeg 0.35s forwards;
+    animation: toNeg 0.35s forwards ease-in-out;
 }
 
 .border-default {
