@@ -93,7 +93,7 @@ body {
     height: 5rem;
     width: min-content;
     min-width: 0;
-    transition: min-width 0.15s ease-in-out;
+    transition: min-width 0.25s ease-in-out 0.1s;
 }
 #sidebar li:first-child a {
     border-radius: 0 1rem 0 0;
@@ -110,18 +110,17 @@ body {
     min-width: 20rem;
 }
 #sidebar li a .icon-text {
-    display: none;
-    opacity: 0;
-}
-#sidebar li:hover a .icon-text {
-    display: block;
-    opacity: 1;
     position: absolute;
     left: 3rem;
-    width: 12.5rem;
-    margin: 0 2rem;
+    font: 0.9rem/1.25 Inter, sans-serif;
     color: white;
-    font: 0.95rem/1.25 Inter, sans-serif;
+    opacity: 0;
+    width: 12.5rem;
+    transition: all 0.25s ease-in-out 0.1s;
+}
+#sidebar li:hover a .icon-text {
+    opacity: 1;
+    margin: 0 2.5rem;
 }
 /* Curved design of menu item when hovered */
 #sidebar li:hover a::before,
