@@ -111,6 +111,7 @@ body {
 }
 #sidebar li a .icon-text {
     position: absolute;
+    visibility: hidden;
     left: 3rem;
     font: 0.9rem/1.25 Inter, sans-serif;
     color: white;
@@ -119,6 +120,7 @@ body {
     transition: all 0.25s ease-in-out 0.1s;
 }
 #sidebar li:hover a .icon-text {
+    visibility: visible;
     opacity: 1;
     margin: 0 2.5rem;
 }
