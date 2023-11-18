@@ -14,7 +14,7 @@
             {% csrf_token %}
             {{ form.csv.label_tag }}
             <div class="uploader">{{ form.csv }}</div>
-            <button type="submit"><img src="{% static 'thesis_app/images/upload.png' %}" />Analyze</button>
+            <button type="submit" class="form__button uploader__button"><img src="{% static 'thesis_app/images/upload.png' %}" />Analyze</button>
         </form>
     </div>
 </div>

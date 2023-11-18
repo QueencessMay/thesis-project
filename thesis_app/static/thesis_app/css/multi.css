@@ -27,6 +27,7 @@ label {
     border-right: 2px solid var(--dark-blue);
     padding: 0.5rem 1rem;
     margin-right: 1rem;
+    cursor: pointer;
     transition: background-color 0.25s ease-in-out;
 } 
 #id_csv::file-selector-button:hover {
@@ -34,34 +35,82 @@ label {
     color: var(--dark-blue);
 }
 
-.uploader__container button {
+.result__container {
+    height: 65vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 2vh;
+}
+.table__wrapper {
+    flex: 1;
+    border: 8px solid var(--bg-blue);
+    border-radius: 1rem;
+    overflow: hidden auto;
+}
+
+.result__table {
+    font: 1rem/1.25 Inter, sans-serif;
+    width: 100%;
+    border-collapse: collapse;
+}
+.result__table th {
+    position: sticky;
+    top: 0;
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+    background-color: var(--main-blue);
+}
+.result__table td {
+    padding: 0.25rem 0.75rem;
+    border-bottom: 1px solid var(--dark-blue);
+}
+.result__table td:first-child {
+    max-width: 45vw;
+    overflow: hidden;
+    border-right: 1px solid var(--dark-blue);
+}
+
+.form__button {
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    font: 1rem/1.25 Inter, sans-serif;
     border-radius: 5rem;
     padding: 0.8rem 1.75rem;
     margin: 0 auto;
-    width: 8rem;
     background: var(--main-blue);
+    font: 1rem/1.25 Inter, sans-serif;
     transition: all 0.25s ease-in-out;
 }
-.uploader__container button:hover {
-    width: 10rem;
+.form__button:hover {
     background: var(--dark-blue);
     color: white;
 }
-.uploader__container button img {
+.form__button img {
     width: 1.25rem;
     height: 1.25rem;
     opacity: 1;
     transition: all 0.5s;
 }
-.uploader__container button:hover img {
+.form__button:hover img {
     width: 0;
     height: 0;
     opacity: 0;
+}
+
+.uploader__button {
+    width: 9rem;
+}
+.uploader__button:hover {
+    width: 12rem;
+}
+.result__button {
+    width: 13rem;
+}
+.result__button:hover {
+    width: 16rem;
 }
 
 .ani--reveal {
