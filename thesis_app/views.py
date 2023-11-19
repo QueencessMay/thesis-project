@@ -54,8 +54,13 @@ def view_multi(request):
   if request.method == 'POST':
     form = CSVForm(request.POST, request.FILES)
     if form.is_valid():
-      file_input = request.FILES['csv']
-      file_output = analyze_file(file_input)
+      file_input = form.cleaned_data['csv']
+      model_input = form.cleaned_data['model_field']
+      
+      model = apps.get_app_config('thesis_app').model_with if model_input == "opt_with" else apps.get_app_config('thesis_app').model_without
+      file_output = analyze_file(file_input, model)
+
+      request.session['model'] = "With Emojis and Emoticons" if model_input == "opt_with" else "Without Emojis and Emoticons"
       request.session['file_output'] = file_output
       return redirect('multiple_result')
   else:
@@ -63,14 +68,18 @@ def view_multi(request):
   return render(request, "thesis_app/multi.html", { 'form': form }) 
 
 def view_multi_result(request):
+  model = request.session.get('model', [])
   file_result = request.session.get('file_output', [])
-  return render(request, "thesis_app/multi-result.html", { 'result': file_result })
+  context = {
+    'model' : model,
+    'result': file_result
+  }
+  return render(request, "thesis_app/multi-result.html", context)
 
 
 # Helper functions
 
-def analyze_file(file):
-  model = apps.get_app_config('thesis_app').model_with # Currently for with emoji and emoticons
+def analyze_file(file, model):
   results = []
 
   for batch in pd.read_csv(file, header=None, names=['review_col'], chunksize=500):
@@ -80,7 +89,7 @@ def analyze_file(file):
     batch_results = [
       {
         'review': review,
-        'sentiment': "negative" if sentiment == 0 else "positive"
+        'sentiment': "Negative" if sentiment == 0 else "Positive"
       }
       for review, sentiment in zip(reviews, sentiments)
     ]
