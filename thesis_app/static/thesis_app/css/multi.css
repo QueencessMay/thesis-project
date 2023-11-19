@@ -1,8 +1,7 @@
 .container--multiple {
-    padding: 3vw;
+    padding: 2.95vw;
     width: 65vw;
     height: max-content;
-    gap: 1vw;
 }
 
 label {
@@ -12,57 +11,141 @@ label {
 .uploader {
     border: 2px solid var(--dark-blue);
     border-radius: 0.3rem;
-    margin: 1.5rem 0;
+    margin: 1.5rem 0 1rem 0;
     overflow: hidden;
 }
 #id_csv {
     font: 0.95rem/1.25 Inter, sans-serif;
     cursor: pointer;
+    width: 100%;
 }
 #id_csv::file-selector-button {
     font: 1rem/1.25 Inter, sans-serif;
     color: white;
     background-color: var(--dark-blue);
-    border: none;
     border-right: 2px solid var(--dark-blue);
     padding: 0.5rem 1rem;
     margin-right: 1rem;
+    cursor: pointer;
+    border: none;
     transition: background-color 0.25s ease-in-out;
 } 
 #id_csv::file-selector-button:hover {
-    background-color: var(--main-blue);
     color: var(--dark-blue);
+    background-color: var(--main-blue);
 }
 
-.uploader__container button {
+.options__container {
+    display: flex;
+    justify-content: space-between;
+    vertical-align: center;
+}
+.options__container label {
+    font: 0.95rem/1.25 Inter, sans-serif;
+    font-weight: 600;
+}
+.options {
+    display: flex;
+    gap: 1.5vw;
+}
+.options label {
+    display: flex;
+    gap: 0.25vw;
+    font: 0.95rem/1.25 Inter, sans-serif;
+    cursor: pointer;
+}
+
+
+/* Styling for multi-result page */
+
+.result__container {
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 2vh;
+}
+.result__model {
+    font: 1.5rem/1 Bungee, sans-serif;
+}
+.table__wrapper {
+    flex: 1;
+    border: 8px solid var(--bg-blue);
+    border-radius: 1rem;
+    overflow: hidden auto;
+}
+
+.result__table {
+    font: 1rem/1.25 Inter, sans-serif;
+    width: 100%;
+    border-collapse: collapse;
+}
+.result__table th {
+    position: sticky;
+    top: 0;
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+    background-color: var(--main-blue);
+}
+.result__table td {
+    padding: 0.25rem 0.75rem;
+    border-bottom: 1px solid var(--dark-blue);
+}
+.result__table td:first-child {
+    max-width: 45vw;
+    overflow: hidden;
+    border-right: 1px solid var(--dark-blue);
+}
+
+
+/* Styling for multi pages CTA buttons */
+
+.form__button {
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    font: 1rem/1.25 Inter, sans-serif;
     border-radius: 5rem;
     padding: 0.8rem 1.75rem;
-    margin: 0 auto;
-    width: 8rem;
     background: var(--main-blue);
+    font: 1rem/1.25 Inter, sans-serif;
     transition: all 0.25s ease-in-out;
 }
-.uploader__container button:hover {
-    width: 10rem;
+.form__button:hover {
     background: var(--dark-blue);
     color: white;
+    gap: 0;
 }
-.uploader__container button img {
+.form__button img {
     width: 1.25rem;
     height: 1.25rem;
     opacity: 1;
     transition: all 0.5s;
 }
-.uploader__container button:hover img {
+.form__button:hover img {
     width: 0;
     height: 0;
     opacity: 0;
 }
+
+.uploader__button {
+    width: 9rem;
+    margin: 1.5rem auto 0 auto;
+}
+.uploader__button:hover {
+    width: 12rem;
+}
+.result__button {
+    width: 13rem;
+    margin: 0 auto;
+}
+.result__button:hover {
+    width: 16rem;
+}
+
+
+/* Other Stylings */
 
 .ani--reveal {
     animation: reveal 0.25s forwards ease-in-out;
@@ -76,4 +159,11 @@ label {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+.bg-pos {
+    background: var(--bg-pos);
+}
+.bg-neg {
+    background: var(--bg-neg);
 }

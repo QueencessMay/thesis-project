@@ -14,7 +14,7 @@
     <!-- Base Stylesheet -->
     <link rel="stylesheet" href="{% static 'thesis_app/css/base.css' %}" />
     {% block stylesheet %}{% endblock stylesheet %}
-    <title>{% block subtitle %} Home {% endblock subtitle %}- Game Reviews Analyzer</title>
+    <title>{% block subtitle %}Home{% endblock subtitle %} - Game Reviews Analyzer</title>
 </head>
 
 <body>
@@ -36,9 +36,9 @@
                 </a>
             </li>
 
-            {% url 'multiple' as multi_page %}
+            {% url 'multiple' as multi_page %} {% url 'multiple_result' as result_page %}
             <li>
-                <a href="{{ multi_page }}" {% if request.path == multi_page %}class="active"{% endif %}>
+                <a href="{{ multi_page }}" {% if request.path == multi_page or request.path == result_page %}class="active"{% endif %}>
                     <ion-icon name="chatbubbles-outline" class="menu-icon"></ion-icon>
                     <div class="icon-text">Analyze Multiple Game Reviews</div>
                 </a>
