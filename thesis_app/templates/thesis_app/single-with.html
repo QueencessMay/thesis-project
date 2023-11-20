@@ -3,12 +3,14 @@
 
 {% block stylesheet %}
 <link rel="stylesheet" href="{% static 'thesis_app/css/single.css' %}" />
+<link rel="prefetch" href="{% static 'thesis_app/js/emoji-list.json' %}">
 {% endblock stylesheet %}
 {% block subtitle %}Single with Emoji and Emoticon{% endblock subtitle %}
 
 {% block content %}
 <div class="wrapper {% if result == 1 %}ani-pos{% elif result == 0 %}ani-neg{% else %}ani-default{% endif %}">
-    <div id="container">
+    <div class="wrapper__bg"></div>
+    <div class="container container--single">
         <div class="title">
             <!-- image -->
             {% if result == 1 %}

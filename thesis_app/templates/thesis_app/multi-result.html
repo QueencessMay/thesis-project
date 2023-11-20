@@ -7,12 +7,34 @@
 {% block subtitle %}Multiple Sentiment{% endblock subtitle %}
 
 {% block content %}
-<div class="wrapper ani-default">
-    <div id="container">
-        <form class="uploader-container" method="POST" action="{% url 'multiple' %}" enctype="multipart/form-data">
-            {% csrf_token %}
-            <button type="submit"><img src="{% static 'thesis_app/images/upload.png' %}" />Download CSV</button>
-        </form>
+<div class="wrapper">
+    <div class="wrapper__bg"></div>
+    <div class="container container--multiple ani--reveal">
+        <div class="result__container">
+            <div class="result__model">Model used: {{ model }}</div>
+            <div class="table__wrapper">
+                <table class="result__table">
+                    <thead>
+                        <th>Game Review</th>
+                        <th>Sentiment</th>
+                    </thead>
+                    <tbody>
+                        {% for item in result %}
+                        <tr id="{{ item.review }}">
+                            <td>{{ item.review }}</td>
+                            <td class="{% if item.sentiment == "Positive" %}bg-pos{% else %}bg-neg{% endif %}">
+                                {{ item.sentiment }}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <a class="form__button result__button" href="{% url 'multiple' %}">
+                <img src="{% static 'thesis_app/images/return.png' %}" />
+                Upload New File
+            </a>
+        </div>
     </div>
 </div>
 {% endblock content %}

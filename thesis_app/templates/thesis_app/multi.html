@@ -7,16 +7,21 @@
 {% block subtitle %}Multiple Sentiment{% endblock subtitle %}
 
 {% block content %}
-<div class="wrapper ani-default">
-    <div id="container">
-        <form class="uploader-container" method="POST" action="{% url 'multiple' %}" enctype="multipart/form-data">
+<div class="wrapper">
+    <div class="wrapper__bg"></div>
+    <div class="container container--multiple ani--reveal">
+        <form class="uploader__container" method="POST" action="{% url 'multiple' %}" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.csv.label_tag }}
             <div class="uploader">{{ form.csv }}</div>
-            <button type="submit"><img src="{% static 'thesis_app/images/upload.png' %}" />Analyze</button>
+            <div class="options__container">
+                {{ form.model_field.label_tag }}
+                <div class="options">{% for option in form.model_field %}
+                    <label>{{ option.tag }} {{ option.choice_label }}</label>
+                {% endfor %}</div>
+            </div>
+            <button type="submit" class="form__button uploader__button"><img src="{% static 'thesis_app/images/upload.png' %}" />Analyze</button>
         </form>
-        <div class="result">
-        </div>
     </div>
 </div>
 {% endblock content %}

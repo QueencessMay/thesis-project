@@ -8,30 +8,41 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Open+Sans:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <!-- Emoji Picker -->
     <link rel="stylesheet" href="{% static "thesis_app/css/emoji.css" %}" />
     <!-- Base Stylesheet -->
     <link rel="stylesheet" href="{% static 'thesis_app/css/base.css' %}" />
     {% block stylesheet %}{% endblock stylesheet %}
-    <title>{% block subtitle %} Home {% endblock subtitle %}- Game Reviews Analyzer</title>
+    <title>{% block subtitle %}Home{% endblock subtitle %} - Game Reviews Analyzer</title>
 </head>
 
 <body>
     <nav id="sidebar">
         <ul>
-            <li><a href="{% url 'single_without' %}">
-                <ion-icon name="chatbubble-outline" class="menu-icon"></ion-icon>
-                <div class="icon-text">Analyze Game Review without Emoji and Emoticon</div>
-            </a></li>
-            <li><a href="{% url 'single_with' %}">
-                <ion-icon name="happy-outline" class="menu-icon"></ion-icon>
-                <div class="icon-text">Analyze Game Review with Emoji and Emoticon</div>
-            </a></li>
-            <li><a href="{% url 'multiple' %}">
-                <ion-icon name="chatbubbles-outline" class="menu-icon"></ion-icon>
-                <div class="icon-text">Analyze Multiple Game Reviews</div>
-            </a></li>
+            {% url 'single_without' as without_page %}
+            <li>
+                <a href="{{ without_page }}" {% if request.path == without_page %}class="active"{% endif %}>
+                    <ion-icon name="chatbubble-outline" class="menu-icon"></ion-icon>
+                    <div class="icon-text">Analyze Game Review<br />Without Emoji and Emoticon</div>
+                </a>
+            </li>
+
+            {% url 'single_with' as with_page %}
+            <li>
+                <a href="{{ with_page }}" {% if request.path == with_page %}class="active"{% endif %}>
+                    <ion-icon name="happy-outline" class="menu-icon"></ion-icon>
+                    <div class="icon-text">Analyze Game Review<br />With Emoji and Emoticon</div>
+                </a>
+            </li>
+
+            {% url 'multiple' as multi_page %} {% url 'multiple_result' as result_page %}
+            <li>
+                <a href="{{ multi_page }}" {% if request.path == multi_page or request.path == result_page %}class="active"{% endif %}>
+                    <ion-icon name="chatbubbles-outline" class="menu-icon"></ion-icon>
+                    <div class="icon-text">Analyze Multiple Game Reviews</div>
+                </a>
+            </li>
         </ul>
     </nav> 
 
