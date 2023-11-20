@@ -4,7 +4,7 @@ from django.apps import apps
 from .forms import CSVForm
 import pandas as pd
 import tensorflow as tf
-from preprocessing import preprocess
+from .preprocessing import preprocess
 
 # Views for one game review with or without emojis and emoticons
 
