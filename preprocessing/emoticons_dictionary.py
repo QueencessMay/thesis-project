@@ -1,4 +1,4 @@
-def transform_emojis_and_emoticons(text):
+def transform_emoticons(text):
     # Mapping emoticons to their emoticon equivalents
     emoticon_dict = {
         #A
@@ -937,7 +937,6 @@ def transform_emojis_and_emoticons(text):
         "F(x_x)F" : "Zombie",
         "[¬º-°]¬" : "Zombie",
         "(-_0)" : "Zombie"
-        # You can add more emoticons and their emoticon equivalents here
     }
 
     # Replace each emoticon with its corresponding emoticon equivalent

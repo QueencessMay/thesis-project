@@ -4,8 +4,7 @@ from django.apps import apps
 from .forms import CSVForm
 import pandas as pd
 import tensorflow as tf
-from . import Preprocessing
-
+from preprocessing import preprocess
 
 # Views for one game review with or without emojis and emoticons
 
@@ -13,7 +12,8 @@ def view_single_without(request):
   if request.method == "POST":
     model = apps.get_app_config('thesis_app').model_without
     text_input = request.POST.get('textarea_input', '')
-    text_output = analyze_single(text_input, model)
+    text_input_preprocessed = preprocess.preprocess_text(text_input, 'without')
+    text_output = analyze_single(text_input_preprocessed, model)
 
     context = {
       'result': text_output,
@@ -58,7 +58,11 @@ def view_multi(request):
       model_input = form.cleaned_data['model_field']
       
       model = apps.get_app_config('thesis_app').model_with if model_input == "opt_with" else apps.get_app_config('thesis_app').model_without
-      file_output = analyze_file(file_input, model)
+      if model_input == "opt_with":
+        review_type = 'with'
+      else:
+        review_type = 'without'
+      file_output = analyze_file(file_input, model, review_type)
 
       request.session['model'] = "With Emojis and Emoticons" if model_input == "opt_with" else "Without Emojis and Emoticons"
       request.session['file_output'] = file_output
@@ -79,12 +83,12 @@ def view_multi_result(request):
 
 # Helper functions
 
-def analyze_file(file, model):
+def analyze_file(file, model, review_type):
   results = []
 
   for batch in pd.read_csv(file, header=None, names=['review_col'], chunksize=500):
     reviews = batch['review_col'].tolist()
-    preprocessed_reviews = [Preprocessing.preprocess_text(text) for text in reviews]
+    preprocessed_reviews = [preprocess.preprocess_text(text, review_type) for text in reviews]
     sentiments = analyze_batch(preprocessed_reviews, model)
     batch_results = [
       {
