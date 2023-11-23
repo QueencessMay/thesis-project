@@ -10,7 +10,7 @@
 <div class="wrapper">
     <div class="wrapper__bg"></div>
     <div class="container container--multiple ani--reveal">
-        <form class="uploader__container" method="POST" action="{% url 'multiple' %}" enctype="multipart/form-data">
+        <form id="uploaderForm" class="uploader__container" method="POST" action="{% url 'multiple' %}" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.csv.label_tag }}
             <div class="uploader">{{ form.csv }}</div>
@@ -21,7 +21,27 @@
                 {% endfor %}</div>
             </div>
             <button type="submit" class="form__button uploader__button"><img src="{% static 'thesis_app/images/upload.png' %}" />Analyze</button>
+            <!-- Loading Indicator -->
+            <div id="loadingIndicator">
+                <div class="loading__container">
+                    <div class="loading__progress"></div>
+                </div>
+                Please wait, analysis may take a while...
+            </div>
         </form>
     </div>
 </div>
+<div id="loadingMask"></div> <!-- layphaks -->
+<!-- Loading Indicator -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    $(document).ready(function () {
+        $('#loadingIndicator').hide();
+        $('#loadingMask').hide();
+        $('#uploaderForm').submit(function () {        
+            $('#loadingIndicator').show();
+            $('#loadingMask').show();
+        });
+    });
+</script>
 {% endblock content %}
