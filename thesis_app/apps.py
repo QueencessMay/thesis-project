@@ -6,8 +6,8 @@ class ThesisAppConfig(AppConfig):
     name = 'thesis_app'
 
     def ready(self):
-        path_without = 'FiouReia/distilbert-uncased-without-emojis-emoticons'
+        path_without = 'FiouReia/distilbert_uncased_trained_with_game_reviews'
         self.model_without = TFDistilBertForSequenceClassification.from_pretrained(path_without)
-        path_with = 'FiouReia/distilbert-uncased-with-emojis-emoticons'
+        path_with = 'FiouReia/distilbert_uncased_trained_with_game_reviews_emojis_emoticons'
         self.model_with = TFDistilBertForSequenceClassification.from_pretrained(path_with)
         self.tokenizer = DistilBertTokenizerFast.from_pretrained('distilbert-base-uncased')
