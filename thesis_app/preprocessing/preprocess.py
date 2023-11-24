@@ -42,7 +42,7 @@ def preprocess_text(input_text, review_type):
 
         return processed_text
     else:
-        # Remove special characters and numbers
+        # Remove special characters
         processed_text = remove_special_characters(expanded_text)
 
         return processed_text
