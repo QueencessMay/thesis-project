@@ -40,6 +40,12 @@
                 <button id="submit-button" type="submit"><img src="{% static 'thesis_app/images/submit.png' %}" /></button>
             </form>
         </div>
+        <form method="post" action="{% url 'set_model_type' %}">
+            {% csrf_token %}   
+            <button type="submit" name="model_type" value="without">
+                    Upload CSV File
+            </button>
+        </form>
     </div>
 </div>
 {% endblock content %}

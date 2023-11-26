@@ -15,10 +15,10 @@
             {{ form.csv.label_tag }}
             <div class="uploader">{{ form.csv }}</div>
             <div class="options__container">
-                {{ form.model_field.label_tag }}
+                {% comment %} {{ form.model_field.label_tag }}
                 <div class="options">{% for option in form.model_field %}
                     <label>{{ option.tag }} {{ option.choice_label }}</label>
-                {% endfor %}</div>
+                {% endfor %}</div> {% endcomment %}
             </div>
             <button type="submit" class="form__button uploader__button"><img src="{% static 'thesis_app/images/upload.png' %}" />Analyze</button>
             <!-- Loading Indicator -->

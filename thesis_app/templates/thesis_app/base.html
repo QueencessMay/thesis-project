@@ -35,14 +35,6 @@
                     <div class="icon-text">Analyze Game Review<br />With Emoji and Emoticon</div>
                 </a>
             </li>
-
-            {% url 'multiple' as multi_page %} {% url 'multiple_result' as result_page %}
-            <li>
-                <a href="{{ multi_page }}" {% if request.path == multi_page or request.path == result_page %}class="active"{% endif %}>
-                    <ion-icon name="chatbubbles-outline" class="menu-icon"></ion-icon>
-                    <div class="icon-text">Analyze Multiple Game Reviews</div>
-                </a>
-            </li>
         </ul>
     </nav> 
 
