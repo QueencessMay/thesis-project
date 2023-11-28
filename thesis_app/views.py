@@ -7,11 +7,11 @@ import tensorflow as tf
 from .preprocessing import preprocess
 import csv
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
 
 # Views for one game review with or without emojis and emoticons
 
 def view_single_without(request):
+  request.session['model_type'] = 'without'
   if request.method == "POST":
     model = apps.get_app_config('thesis_app').model_without
     text_input = request.POST.get('textarea_input', '')
@@ -27,6 +27,7 @@ def view_single_without(request):
     return render(request, 'thesis_app/single-without.html')
 
 def view_single_with(request):
+  request.session['model_type'] = 'with'
   if request.method == "POST":
     model = apps.get_app_config('thesis_app').model_with
     text_input = request.POST.get('textarea_input', '')
@@ -53,13 +54,13 @@ def analyze_single(input, model):
 # Views for multiple game reviews with or without emojis and emoticons
  
 def view_multi_result(request):
-    model = request.session.get('model', [])
-    file_result = request.session.get('file_output', [])
-    context = {
-        'model': model,
-        'result': file_result
-    }
-    return render(request, "thesis_app/multi-result.html", context)
+  model = request.session.get('model', [])
+  file_result = request.session.get('file_output', [])
+  context = {
+    'model': model,
+    'result': file_result
+  }
+  return render(request, "thesis_app/multi-result.html", context)
 
 # Add this function to generate CSV file
 def generate_csv(data, filename):

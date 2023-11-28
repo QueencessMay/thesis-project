@@ -30,14 +30,16 @@
                     </tbody>
                 </table>
             </div>
-            <a class="form__button result__button" href="{% url 'multiple' %}">
-                <img src="{% static 'thesis_app/images/return.png' %}" />
-                Back
-            </a>
-            <a class="form__button result__button" href="{% url 'multiple_result2' %}">
-                <img src="{% static 'thesis_app/images/return.png' %}" />
-                Download Result
-            </a>
+            <div class="button__container">
+                <a class="form__button result__button" href="{% url 'multiple' %}">
+                    <img src="{% static 'thesis_app/images/return.png' %}" />
+                    Upload a New File
+                </a>
+                <a class="form__button result__button" href="{% url 'multiple_result2' %}">
+                    <img src="{% static 'thesis_app/images/download.png' %}" />
+                    Download the Results
+                </a>
+            </div>
         </div>
     </div>
 </div>
