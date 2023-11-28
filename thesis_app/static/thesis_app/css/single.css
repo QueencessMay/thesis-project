@@ -2,7 +2,7 @@
     padding: 5vw;
     width: 70vw;
     min-height: 80vh;
-    gap: 2vw;
+    gap: 1.5vw;
 }
 
 .title {
@@ -18,11 +18,11 @@
 
 #result__icon {
     width: auto;
-    height: 20vh;
+    height: 16vh;
     border-radius: 50%;
 }
 #result__title {
-    font: 3rem/1.25 Bungee, sans-serif;
+    font: 2.75rem/1.25 Bungee, sans-serif;
 }
 
 .result__rating {
@@ -40,8 +40,8 @@
 .rating__icon {
     border-radius: 50%;
     padding: 0.5rem;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 2rem;
+    height: 2rem;
 }
 .rating__icon:first-child {
     background-color: var(--dark-pos);
@@ -104,6 +104,35 @@
 }
 .content #submit-button:hover {
     background-color: var(--dark-blue);
+}
+
+/* Styling for CTA buttons */
+
+.form__button {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    border-radius: 5rem;
+    padding: 0.5rem 1.75rem;
+    margin: 0 auto;
+    background: var(--main-blue);
+    font: 1rem/1.25 Inter, sans-serif;
+    transition: all 0.25s ease-in-out;
+}
+.form__button:hover {
+    background: var(--dark-blue);
+    color: white;
+    gap: 0.5rem;
+}
+.form__button .button__icon {
+    font-size: 0;
+    color: white;
+    transition: all 0.25s;
+}
+.form__button:hover .button__icon {
+    font-size: 1.25rem;
 }
 
 .text-default {

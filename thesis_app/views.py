@@ -5,10 +5,13 @@ from .forms import CSVForm
 import pandas as pd
 import tensorflow as tf
 from .preprocessing import preprocess
+import csv
+from django.http import HttpResponse
 
 # Views for one game review with or without emojis and emoticons
 
 def view_single_without(request):
+  request.session['model_type'] = 'without'
   if request.method == "POST":
     model = apps.get_app_config('thesis_app').model_without
     text_input = request.POST.get('textarea_input', '')
@@ -24,6 +27,7 @@ def view_single_without(request):
     return render(request, 'thesis_app/single-without.html')
 
 def view_single_with(request):
+  request.session['model_type'] = 'with'
   if request.method == "POST":
     model = apps.get_app_config('thesis_app').model_with
     text_input = request.POST.get('textarea_input', '')
@@ -47,39 +51,74 @@ def analyze_single(input, model):
   sentiment = tf.argmax(outputs.logits, axis=1).numpy()[0]
   return sentiment
 
-
 # Views for multiple game reviews with or without emojis and emoticons
-
-def view_multi(request):
-  if request.method == 'POST':
-    form = CSVForm(request.POST, request.FILES)
-    if form.is_valid():
-      file_input = form.cleaned_data['csv']
-      model_input = form.cleaned_data['model_field']
-      
-      model = apps.get_app_config('thesis_app').model_with if model_input == "opt_with" else apps.get_app_config('thesis_app').model_without
-      if model_input == "opt_with":
-        review_type = 'with'
-      else:
-        review_type = 'without'
-      file_output = analyze_file(file_input, model, review_type)
-
-      request.session['model'] = "With Emojis and Emoticons" if model_input == "opt_with" else "Without Emojis and Emoticons"
-      request.session['file_output'] = file_output
-      return redirect('multiple_result')
-  else:
-    form = CSVForm()
-  return render(request, "thesis_app/multi.html", { 'form': form }) 
-
+ 
 def view_multi_result(request):
   model = request.session.get('model', [])
   file_result = request.session.get('file_output', [])
   context = {
-    'model' : model,
+    'model': model,
     'result': file_result
   }
   return render(request, "thesis_app/multi-result.html", context)
 
+# Add this function to generate CSV file
+def generate_csv(data, filename):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = f'attachment; filename="{filename}"'
+
+    writer = csv.writer(response)
+    writer.writerow(['Review', 'Sentiment'])
+
+    for row in data:
+        writer.writerow([row['review'], row['sentiment']])
+
+    return response
+
+def view_multi_result2(request):
+    model = request.session.get('model', [])
+    file_result = request.session.get('file_output', {})
+
+    # Generate a unique filename (you can customize it as needed)
+    filename = 'multi_sentiment_results.csv'
+
+    # Generate and return the CSV response
+    return generate_csv(file_result, filename)
+
+def set_model_type(request):
+    if request.method == 'POST':
+        model_type = request.POST.get('model_type', '')
+        request.session['model_type'] = model_type  # Store the model_type value in the session
+        return redirect('multiple')  
+
+def view_multi(request):
+    if request.method == 'POST':
+        form = CSVForm(request.POST, request.FILES)
+        if form.is_valid():
+            file_input = form.cleaned_data['csv']
+            model_type = request.session.get('model_type')
+
+            model = (
+              apps.get_app_config('thesis_app').model_with
+              if model_type == "with"
+              else apps.get_app_config('thesis_app').model_without
+            )
+
+            if model_type == "with":
+                review_type = 'with'
+            else:
+                review_type = "without"
+               
+            file_output = analyze_file(file_input, model, review_type)
+
+#           Save the results in the session for later use
+            request.session['model'] = "With Emojis and Emoticons" if model_type == "with" else "Without Emojis and Emoticons"
+            request.session['file_output'] = file_output
+
+            return redirect('multiple_result')
+    else:
+        form = CSVForm()
+    return render(request, "thesis_app/multi.html", {'form': form})
 
 # Helper functions
 

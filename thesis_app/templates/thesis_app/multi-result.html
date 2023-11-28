@@ -11,7 +11,7 @@
     <div class="wrapper__bg"></div>
     <div class="container container--multiple ani--reveal">
         <div class="result__container">
-            <div class="result__model">Model used: {{ model }}</div>
+            <div class="result__model">Results</div>
             <div class="table__wrapper">
                 <table class="result__table">
                     <thead>
@@ -30,10 +30,16 @@
                     </tbody>
                 </table>
             </div>
-            <a class="form__button result__button" href="{% url 'multiple' %}">
-                <img src="{% static 'thesis_app/images/return.png' %}" />
-                Upload New File
-            </a>
+            <div class="button__container">
+                <a class="form__button result__button" href="{% url 'multiple' %}">
+                    <img src="{% static 'thesis_app/images/return.png' %}" />
+                    Upload a New File
+                </a>
+                <a class="form__button result__button" href="{% url 'multiple_result2' %}">
+                    <img src="{% static 'thesis_app/images/download.png' %}" />
+                    Download the Results
+                </a>
+            </div>
         </div>
     </div>
 </div>

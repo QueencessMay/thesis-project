@@ -97,8 +97,27 @@ label {
     border-right: 1px solid var(--dark-blue);
 }
 
+.button__container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
 
-/* Styling for multi pages CTA buttons */
+.uploader__button {
+    width: 9rem;
+    margin: 1.5rem auto 0 auto;
+}
+.uploader__button:hover {
+    width: 12rem;
+}
+.result__button {
+    width: 16rem;
+    margin: 0 auto;
+}
+.result__button:hover {
+    width: 19rem;
+}
+
+/* Styling for CTA buttons */
 
 .form__button {
     cursor: pointer;
@@ -127,21 +146,6 @@ label {
     width: 0;
     height: 0;
     opacity: 0;
-}
-
-.uploader__button {
-    width: 9rem;
-    margin: 1.5rem auto 0 auto;
-}
-.uploader__button:hover {
-    width: 12rem;
-}
-.result__button {
-    width: 13rem;
-    margin: 0 auto;
-}
-.result__button:hover {
-    width: 16rem;
 }
 
 
@@ -209,4 +213,4 @@ label {
 @keyframes progress {
     from { left: -50%; }
     to { left: 100%; }
-  }
+}

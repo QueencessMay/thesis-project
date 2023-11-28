@@ -12,7 +12,7 @@ def convert_text_to_lowercase(input_text):
 
 def remove_special_characters(input_text):
     # Use regular expression to remove special characters
-    processed_text = re.sub(r'[^\w\s\-_+/]', '', input_text)
+    processed_text = re.sub(r'[^\w\s\.-_+/]', '', input_text)
 
     return processed_text
 
