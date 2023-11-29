@@ -941,6 +941,6 @@ def transform_emoticons(text):
 
     # Replace each emoticon with its corresponding emoticon equivalent
     for emoticon, unicode_equiv in emoticon_dict.items():
-        text = text.replace(emoticon, " Emoticon_"+unicode_equiv)
+        text = text.replace(emoticon, " Emoticon_"+unicode_equiv +" ")
 
     return (text)
