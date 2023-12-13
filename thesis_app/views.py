@@ -15,7 +15,7 @@ def view_single_without(request):
   if request.method == "POST":
     model = apps.get_app_config('thesis_app').model_without
     text_input = request.POST.get('textarea_input', '')
-    text_input_preprocessed = preprocess.preprocess_text(text_input, 'without')
+    text_input_preprocessed = preprocess.preprocess_text(text_input, 'with')
     text_output = analyze_single(text_input_preprocessed, model)
 
     context = {
@@ -107,7 +107,7 @@ def view_multi(request):
             if model_type == "with":
                 review_type = 'with'
             else:
-                review_type = "without"
+                review_type = "with"
                
             file_output = analyze_file(file_input, model, review_type)
 
