@@ -104,11 +104,8 @@ def view_multi(request):
               else apps.get_app_config('thesis_app').model_without
             )
 
-            if model_type == "with":
-                review_type = 'with'
-            else:
-                review_type = "with"
-               
+            review_type = 'with'
+            
             file_output = analyze_file(file_input, model, review_type)
 
 #           Save the results in the session for later use
