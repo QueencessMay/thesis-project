@@ -42,8 +42,9 @@
         </div>
         <form method="post" action="{% url 'set_model_type' %}">
             {% csrf_token %}   
+            <div class="form__divider"><div></div>or<div></div></div>
             <button class="form__button" type="submit" name="model_type" value="without">
-                Upload CSV File <ion-icon class="button__icon" name="arrow-forward-circle"></ion-icon>
+                Upload a CSV File <ion-icon class="button__icon" name="arrow-forward-circle"></ion-icon>
             </button>
         </form>
     </div>

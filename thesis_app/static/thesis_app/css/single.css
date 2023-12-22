@@ -1,5 +1,5 @@
 .container--single {
-    padding: 5vw;
+    padding: 3.5vw 5vw;
     width: 70vw;
     min-height: 80vh;
     gap: 1.5vw;
@@ -133,6 +133,19 @@
 }
 .form__button:hover .button__icon {
     font-size: 1.25rem;
+}
+.form__divider {
+    margin-bottom: 1.5vw;
+    font: 0.85rem/1.25 Inter, sans-serif;
+    display: flex;
+    align-items: center;
+}
+.form__divider div {
+    height: 3px;
+    border-radius: 99.99px;
+    background: rgba(118, 123, 141, 0.1);
+    margin: 0 6px;
+    flex: 1;
 }
 
 .text-default {
