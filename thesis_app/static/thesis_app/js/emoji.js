@@ -1,7 +1,7 @@
 const e1 = new EmojiPopover({
     button: '.toggle-emoji',
     container: 'html',
-    targetElement: '.textarea-emoji',
+    targetElement: '.textarea-input',
     emojiList: [
         { value: '😀', },
         { value: '😄', },
@@ -119,7 +119,7 @@ const e1 = new EmojiPopover({
     ]
 })
 
-const textarea = document.querySelector(".textarea-emoji");
+const textarea = document.querySelector(".textarea-input");
 
 e1.onSelect(val => {
     const cursorPosition = textarea.selectionStart;
