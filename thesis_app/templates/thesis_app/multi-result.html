@@ -9,9 +9,9 @@
 {% block content %}
 <div class="wrapper">
     <div class="wrapper__bg"></div>
-    <div class="container container--multiple ani--reveal">
-        <div class="result__container">
-            <div class="result__model">Results</div>
+    <div class="container container--result ani--reveal">
+        <h1 class="result__title">Results</h1>
+        <div class="result__content">
             <div class="table__wrapper">
                 <table class="result__table">
                     <thead>
@@ -30,15 +30,25 @@
                     </tbody>
                 </table>
             </div>
-            <div class="button__container">
-                <a class="form__button result__button" href="{% url 'multiple' %}">
-                    <img src="{% static 'thesis_app/images/return.png' %}" />
-                    Upload a New File
-                </a>
-                <a class="form__button result__button" href="{% url 'multiple_result2' %}">
-                    <img src="{% static 'thesis_app/images/download.png' %}" />
-                    Download the Results
-                </a>
+
+            <div  class="result__summary"> 
+                <h2 class="summary__title">Summary</h2>
+                <ul class="summary__content">
+                    <li><p>Model:</p> <p>{{ model }}</p></li>
+                    <li><p>Total Game Reviews:</p> <p>{{ total|default:'0' }}</p></li>
+                    <li><p>Total Positive:</p> <p>{{ positive|default:'0' }}</p></li>
+                    <li><p>Total Negative:</p> <p>{{ negative|default:0 }}</p></li>
+                </ul>
+                <div class="button__container">
+                    <a class="form__button result__button" href="{% url 'download' option=option %}">
+                        <img src="{% static 'thesis_app/images/download.png' %}" />
+                        Download the Results
+                    </a>
+                    <a class="form__button result__button" href="{% url 'multiple' option=option %}">
+                        <img src="{% static 'thesis_app/images/return.png' %}" />
+                        Analyze a New File
+                    </a>
+                </div>
             </div>
         </div>
     </div>

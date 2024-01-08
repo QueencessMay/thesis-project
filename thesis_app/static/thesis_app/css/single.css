@@ -1,40 +1,42 @@
 .container--single {
-    padding: 5vw;
+    padding: 3.5vw 5vw;
     width: 70vw;
     min-height: 80vh;
     gap: 1.5vw;
 }
 
-.title {
+.heading {
     display: flex;
     align-items: center;
     gap: 5vw;
 }
-.title__content {
+.heading__content {
     flex: 1;
     text-align: center;
     width: 100%;
 }
 
-#result__icon {
+.result__icon {
     width: auto;
     height: 16vh;
     border-radius: 50%;
 }
-#result__title {
+.result__title {
     font: 2.75rem/1.25 Bungee, sans-serif;
 }
 
-.result__rating {
+.result__model {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
 }
-.result__rating .bar {
+.result__model .bar {
     flex: 1;
-    height: 0.5rem;
-    border-radius: 0.25rem;
+    padding: 0.25rem;
+    border-radius: 1rem;
+    font: 0.9rem/1.25 Inter, sans-serif;
+    color: white;
 }
 
 .rating__icon {
@@ -53,22 +55,11 @@
 .content {
     position: relative;
     display: flex;
-    flex-direction: column;
     flex: 1;
+    flex-direction: column;
     height: 100%;
 }
-.content .textarea-emoji,
-.emojionearea-editor {
-    height: 100% !important;
-    width: 100% !important;
-    border: none !important;
-    outline: none !important;
-    font: 1rem/1.25 Inter, sans-serif !important;
-    flex: 1 !important;
-    z-index: 101 !important;
-    padding: 0 !important;
-}
-.textarea-container {
+.textarea__container {
     position: absolute;
     padding: 1.25rem 1.25rem 3.25rem 1.25rem;
     height: 100%;
@@ -77,8 +68,14 @@
     background: white;
     cursor: typing;
 }
-.emojionearea {
-    all: unset;
+.textarea__container .textarea-input {
+    height: 100%;
+    width: 100%;
+    border: none;
+    outline: none;
+    font: 1rem/1.25 Inter, sans-serif;
+    flex: 1;
+    padding: 0;
 }
 .toggle-emoji {
     position: absolute;
@@ -90,7 +87,7 @@
     font-size: 2rem;
     color: var(--main-blue);
 }
-.content #submit-button {
+.content .submit-button {
     position: absolute;
     bottom: 10px;
     right: 10px;
@@ -102,9 +99,10 @@
     padding: 0.5rem;
     transition: background-color 0.25s ease-in-out;
 }
-.content #submit-button:hover {
+.content .submit-button:hover {
     background-color: var(--dark-blue);
 }
+
 
 /* Styling for CTA buttons */
 
@@ -134,6 +132,21 @@
 .form__button:hover .button__icon {
     font-size: 1.25rem;
 }
+.form__divider {
+    font: 0.85rem/1.25 Inter, sans-serif;
+    display: flex;
+    align-items: center;
+}
+.form__divider div {
+    height: 3px;
+    border-radius: 99.99px;
+    background: rgba(118, 123, 141, 0.1);
+    margin: 0 6px;
+    flex: 1;
+}
+
+
+/* For Dynamic Styling */
 
 .text-default {
     color: var(--dark-blue);
@@ -143,21 +156,6 @@
 }
 .text-neg {
     color: var(--dark-neg);
-}
-
-@keyframes toPos {
-    50% { background-color: var(--bg-blue); }
-    100% { background-color: var(--bg-pos); }
-}
-@keyframes toNeg {
-    50% { background-color: var(--bg-blue); }
-    100% { background-color: var(--bg-neg); }
-}
-.ani-pos {
-    animation: toPos 0.35s forwards ease-in-out;
-}
-.ani-neg {
-    animation: toNeg 0.35s forwards ease-in-out;
 }
 
 .border-default {
@@ -180,24 +178,70 @@
     background: var(--dark-neg);
 }
 
+.ani-default {
+    animation: toDefault 0.35s forwards ease-in-out;
+}
+.ani-pos {
+    animation: toPos 0.35s forwards ease-in-out;
+}
+.ani-neg {
+    animation: toNeg 0.35s forwards ease-in-out;
+}
+@keyframes toDefault {
+    50% { background-color: rgba(255, 255, 255, 0.5); }
+    100% { background-color: var(--bg-blue); }
+}
+@keyframes toPos {
+    50% { background-color: var(--bg-blue); }
+    100% { background-color: var(--bg-pos); }
+}
+@keyframes toNeg {
+    50% { background-color: var(--bg-blue); }
+    100% { background-color: var(--bg-neg); }
+}
+
+
+/* Styles for Smaller Screens */
+
 @media (max-width: 768px) {
-    #container {
-        width: 78vw;
-    }
-    .title {
-        flex-direction: column;
+    .container--single {
+        width: 87%;
+        min-height: 87%;
+        padding: 7vw 5vw;
         gap: 3vw;
     }
-    #result__icon {
-        height: 16vh;
+    .heading {
+        flex-direction: column;
+        gap: 1.75vw;
     }
-    #result__title {
-        font-size: 2rem;
+    .result__title {
+        font-size: 1.75rem;
     }
+    .result__icon {
+        height: 15vh;
+    }
+    .result__model {
+        gap: 0.25rem;
+    }
+    .result__model .bar {
+        font: 0.75rem/1.25 Inter, sans-serif;
+    }
+    .rating__icon {
+        padding: 0.45rem;
+        width: 1.85rem;
+        height: 1.85rem;
+    }    
     .toggle-emoji {
         display: none;
     }
     .textarea-container {
         padding: 1.25rem 3.25rem 1.25rem 1.25rem;
+    }
+    .content .textarea-input {
+        font: 0.9rem/1.25 Inter, sans-serif;
+    }
+    .form__button {
+        padding: 0.5rem 1.75rem;
+        font: 0.9rem/1.25 Inter, sans-serif;
     }
 }

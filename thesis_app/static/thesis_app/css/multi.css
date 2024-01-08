@@ -1,4 +1,4 @@
-.container--multiple {
+.container--uploader {
     padding: 2.95vw;
     width: 65vw;
     height: max-content;
@@ -18,6 +18,7 @@ label {
     font: 0.95rem/1.25 Inter, sans-serif;
     cursor: pointer;
     width: 100%;
+    padding-right: 1rem;
 }
 #id_csv::file-selector-button {
     font: 1rem/1.25 Inter, sans-serif;
@@ -58,23 +59,29 @@ label {
 
 /* Styling for multi-result page */
 
-.result__container {
+.container--result {
+    padding: 2.95vw;
+    width: 75vw;
+    height: max-content;
+}
+
+.result__content {
     height: 70vh;
     display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    gap: 2vh;
+    gap: 2vw;
 }
-.result__model {
-    font: 1.5rem/1 Bungee, sans-serif;
+
+.result__title {
+    font: 2rem/1 Bungee, sans-serif;
+    margin-bottom: 1.5vh;
 }
+
 .table__wrapper {
     flex: 1;
     border: 8px solid var(--bg-blue);
     border-radius: 1rem;
     overflow: hidden auto;
 }
-
 .result__table {
     font: 1rem/1.25 Inter, sans-serif;
     width: 100%;
@@ -92,32 +99,52 @@ label {
     border-bottom: 1px solid var(--dark-blue);
 }
 .result__table td:first-child {
-    max-width: 45vw;
+    max-width: 35vw;
     overflow: hidden;
     border-right: 1px solid var(--dark-blue);
 }
 
+.result__summary {
+    width: 20vw;
+}
+.summary__title {
+    font: 1.35rem/1 Bungee, sans-serif;
+    margin: 1.5vh 0;
+}
+.summary__content li {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font: 1rem/1.25 Inter, sans-serif;
+    padding: 1vh 0;
+    gap: 1vw;
+}
+.summary__content li p:last-child {
+    font: 1rem/1 Bungee, sans-serif;
+    text-align: right;
+}
+
 .button__container {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    margin-top: 4vh;
+    gap: 2vh;
 }
 
 .uploader__button {
-    width: 9rem;
+    width: 10rem;
     margin: 1.5rem auto 0 auto;
 }
 .uploader__button:hover {
-    width: 12rem;
+    width: 13rem;
 }
 .result__button {
-    width: 16rem;
+    width: 100%;
     margin: 0 auto;
 }
-.result__button:hover {
-    width: 19rem;
-}
 
-/* Styling for CTA buttons */
+
+/* Styles for CTA buttons */
 
 .form__button {
     cursor: pointer;
@@ -126,9 +153,9 @@ label {
     justify-content: center;
     gap: 0.5rem;
     border-radius: 5rem;
-    padding: 0.8rem 1.75rem;
+    padding: 0.8rem 1.25rem;
     background: var(--main-blue);
-    font: 1rem/1.25 Inter, sans-serif;
+    font: 0.95rem/1.25 Inter, sans-serif;
     transition: all 0.25s ease-in-out;
 }
 .form__button:hover {
@@ -137,8 +164,8 @@ label {
     gap: 0;
 }
 .form__button img {
-    width: 1.25rem;
-    height: 1.25rem;
+    width: 1.05rem;
+    height: 1.05rem;
     opacity: 1;
     transition: all 0.5s;
 }
@@ -151,26 +178,29 @@ label {
 
 /* Other Stylings */
 
-.ani--reveal {
-    animation: reveal 0.25s forwards ease-in-out;
-}
-@keyframes reveal {
-    0% {
-        opacity: 0;
-        transform: translateY(30%);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 .bg-pos {
     background: var(--bg-pos);
 }
 .bg-neg {
     background: var(--bg-neg);
 }
+
+.ani--reveal {
+    animation: reveal 0.25s forwards ease-in-out;
+}
+@keyframes reveal {
+    from {
+        opacity: 0;
+        transform: translateY(30%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* Styles for Loading  */
 
 #loadingIndicator {
     display: flex;
@@ -198,6 +228,7 @@ label {
     border-radius: 20rem;
     animation: progress 2s infinite;
 }
+
 #loadingMask {
     position: absolute;
     top: 0;
@@ -206,6 +237,7 @@ label {
     height: 100vh;
     z-index: 5000;
 }
+
 @keyframes loading-reveal {
     from { width: 0%; }
     to { width: 100%; }
@@ -213,4 +245,44 @@ label {
 @keyframes progress {
     from { left: -50%; }
     to { left: 100%; }
+}
+
+
+/* Styles for Smaller Screens */
+
+@media (max-width: 768px) {
+    .container--uploader,
+    .container--result {
+        padding: 7vw 5vw;
+        width: 85%;
+    }
+    label {
+        font: 1.75rem/1 Bungee, sans-serif;
+    }
+    .form__button {
+        padding: 0.5rem 1.25rem;
+        font: 0.9rem/1.25 Inter, sans-serif;
+    }
+    #id_csv {
+        font: 0.85rem/1.25 Inter, sans-serif;
+    }
+    #id_csv::file-selector-button {
+        font: 0.9rem/1.25 Inter, sans-serif;
+        padding: 0.5rem 0.75rem;
+        margin-right: 0.75rem;
+    }
+    .uploader {
+        margin: 1rem 0;
+    }
+
+    .result__summary {
+        width: 100%;
+    }
+    .result__content {
+        flex-direction: column;
+    }
+
+    .result__table td:last-child {
+        vertical-align: baseline;
+    }
 }
