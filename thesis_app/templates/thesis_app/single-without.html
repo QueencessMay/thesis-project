@@ -10,43 +10,42 @@
 <div class="wrapper {% if result == 1 %}ani-pos{% elif result == 0 %}ani-neg{% else %}ani-default{% endif %}">
     <div class="wrapper__bg"></div>
     <div class="container container--single">
-        <div class="title">
+        <div class="heading">
             <!-- image -->
             {% if result == 1 %}
-                <img id="result__icon" class="border-pos" src="{% static 'thesis_app/images/happy.png' %}" />
+                <img class="result__icon border-pos" src="{% static 'thesis_app/images/happy.png' %}" />
             {% elif result == 0 %}
-                <img id="result__icon" class="border-neg" src="{% static 'thesis_app/images/angry.png' %}" />   
+                <img class="result__icon border-neg" src="{% static 'thesis_app/images/angry.png' %}" />   
             {% else %}
-                <img id="result__icon" class="border-default" src="{% static 'thesis_app/images/neutral.png' %}" />
+                <img class="result__icon border-default" src="{% static 'thesis_app/images/neutral.png' %}" />
             {% endif %}            
             <!-- end of image -->
-            <div class="title__content">
-                <div id="result__title" class="{% if result == 1 %}text-pos{% elif result == 0 %}text-neg{% else %}text-default{% endif %}">
+            <div class="heading__content">
+                <div class="result__title {% if result == 1 %}text-pos{% elif result == 0 %}text-neg{% else %}text-default{% endif %}">
                     {% if result == 1 %}Positive{% elif result == 0 %}Negative{% else %}Game{% endif %} Review
                 </div>
-                <div class="result__rating">
+                <div class="result__model">
                     <img class="rating__icon" src="{% static 'thesis_app/images/like.png' %}" />
-                    <div class="bar {% if result == 1 %}bar-pos{% elif result == 0 %}bar-neg{% else %}bar-default{% endif %}"></div>
+                    <div class="bar {% if result == 1 %}bar-pos{% elif result == 0 %}bar-neg{% else %}bar-default{% endif %}">
+                        Model: Without Emoji and Emoticon
+                    </div>
                     <img class="rating__icon" src="{% static 'thesis_app/images/dislike.png' %}" />
                 </div>
             </div>
         </div>
+        <!-- Single Game Review -->
         <div class="content">
             <form method="POST" action="{% url 'single_without' %}">
                 {% csrf_token %}
-                <div class="textarea-container">
-                    <textarea class="textarea-emoji" id="text_input" name="textarea_input" placeholder="Enter your PLAIN TEXT review here...">{{ user_input }}</textarea>
+                <div class="textarea__container">
+                    <textarea class="textarea-input" id="text_input" name="textarea_input" placeholder="Enter your PLAIN TEXT review here...">{{ user_input }}</textarea>
                 </div>
-                <button id="submit-button" type="submit"><img src="{% static 'thesis_app/images/submit.png' %}" /></button>
+                <button class="submit-button" type="submit"><img src="{% static 'thesis_app/images/submit.png' %}" /></button>
             </form>
         </div>
-        <form method="post" action="{% url 'set_model_type' %}">
-            {% csrf_token %}   
-            <div class="form__divider"><div></div>or<div></div></div>
-            <button class="form__button" type="submit" name="model_type" value="without">
-                Upload a CSV File <ion-icon class="button__icon" name="arrow-forward-circle"></ion-icon>
-            </button>
-        </form>
+        <!-- Multiple Game Reviews -->
+        <div class="form__divider"><div></div>or<div></div></div>
+        <a class="form__button" href="{% url 'multiple' option='without-emoji-and-emoticon' %}"> Upload a CSV File <ion-icon class="button__icon" name="arrow-forward-circle"></ion-icon></a>
     </div>
 </div>
 {% endblock content %}

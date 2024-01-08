@@ -51,18 +51,60 @@ def analyze_single(input, model):
   sentiment = tf.argmax(outputs.logits, axis=1).numpy()[0]
   return sentiment
 
+
 # Views for multiple game reviews with or without emojis and emoticons
- 
-def view_multi_result(request):
+
+def view_multi(request, option):
+  if request.method == 'POST':
+    form = CSVForm(request.POST, request.FILES)
+    if form.is_valid():
+      file_input = form.cleaned_data['csv']
+
+      model = (
+        apps.get_app_config('thesis_app').model_with
+        if option == "with-emoji-and-emoticon"
+        else apps.get_app_config('thesis_app').model_without
+      )
+
+      review_type = 'with'
+          
+      file_output = analyze_file(file_input, model, review_type)
+
+      request.session['model'] = "With Emoji and Emoticon" if option == "with-emoji-and-emoticon" else "Without Emoji and Emoticon"
+      request.session['file_output'] = file_output
+
+      return redirect('multiple_result', option=option)
+  else:
+    form = CSVForm()
+
+  context = {
+      'form': form,
+      'option': option
+  }
+  return render(request, "thesis_app/multi.html", context)
+
+def view_multi_result(request, option):
   model = request.session.get('model', [])
   file_result = request.session.get('file_output', [])
   context = {
     'model': model,
-    'result': file_result
+    'result': file_result['results'],
+    'total': file_result['total'],
+    'positive': file_result['pos'],
+    'negative': file_result['neg'],
+    'option': option
   }
   return render(request, "thesis_app/multi-result.html", context)
 
-# Add this function to generate CSV file
+def download_result(request, option):
+    model = request.session.get('model', [])
+    file_result = request.session.get('file_output', {})
+    filename = option + '_results.csv'
+    return generate_csv(file_result['results'], filename)
+
+
+# Helper functions
+
 def generate_csv(data, filename):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = f'attachment; filename="{filename}"'
@@ -75,55 +117,9 @@ def generate_csv(data, filename):
 
     return response
 
-def view_multi_result2(request):
-    model = request.session.get('model', [])
-    file_result = request.session.get('file_output', {})
-
-    # Generate a unique filename (you can customize it as needed)
-    filename = 'multi_sentiment_results.csv'
-
-    # Generate and return the CSV response
-    return generate_csv(file_result, filename)
-
-def set_model_type(request):
-    if request.method == 'POST':
-        model_type = request.POST.get('model_type', '')
-        request.session['model_type'] = model_type  # Store the model_type value in the session
-        return redirect('multiple')  
-
-def view_multi(request):
-    if request.method == 'POST':
-        form = CSVForm(request.POST, request.FILES)
-        if form.is_valid():
-            file_input = form.cleaned_data['csv']
-            model_type = request.session.get('model_type')
-
-            model = (
-              apps.get_app_config('thesis_app').model_with
-              if model_type == "with"
-              else apps.get_app_config('thesis_app').model_without
-            )
-
-            if model_type == "with":
-                review_type = 'with'
-            else:
-                review_type = "without"
-               
-            file_output = analyze_file(file_input, model, review_type)
-
-#           Save the results in the session for later use
-            request.session['model'] = "With Emojis and Emoticons" if model_type == "with" else "Without Emojis and Emoticons"
-            request.session['file_output'] = file_output
-
-            return redirect('multiple_result')
-    else:
-        form = CSVForm()
-    return render(request, "thesis_app/multi.html", {'form': form})
-
-# Helper functions
-
 def analyze_file(file, model, review_type):
   results = []
+  total = num_pos = num_neg = 0
 
   for batch in pd.read_csv(file, header=None, names=['review_col'], chunksize=500):
     reviews = batch['review_col'].tolist()
@@ -137,8 +133,11 @@ def analyze_file(file, model, review_type):
       for review, sentiment in zip(reviews, sentiments)
     ]
     results.extend(batch_results)
-
-  return results
+    total += len(reviews)
+    num_pos += sentiments.count(1)
+    num_neg += sentiments.count(0)
+    
+  return {'results': results, 'total': total, 'pos': num_pos, 'neg': num_neg}
 
 def analyze_batch(reviews, model):
   tokenizer = apps.get_app_config('thesis_app').tokenizer
