@@ -15,7 +15,7 @@ def view_single_without(request):
   if request.method == "POST":
     model = apps.get_app_config('thesis_app').model_without
     text_input = request.POST.get('textarea_input', '')
-    text_input_preprocessed = preprocess.preprocess_text(text_input, 'without')
+    text_input_preprocessed = preprocess.preprocess_text(text_input, 'with')
     text_output = analyze_single(text_input_preprocessed, model)
 
     context = {
