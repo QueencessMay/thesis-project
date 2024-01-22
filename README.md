@@ -1,6 +1,6 @@
 
 # Game Reviews Sentiment Analyzer
-![Homepage](./thesis_app/static/images/homepage.png)
+![Homepage](./thesis_app/static/thesis_app/images/homepage.png)
 
 A web application for analyzing the sentiment of game reviews.
 
