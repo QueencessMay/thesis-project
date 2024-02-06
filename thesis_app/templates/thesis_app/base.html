@@ -18,12 +18,14 @@
 </head>
 
 <body>
+    {% url 'home' as init_page %}
     {% url 'single_without' as without_page %}
     {% url 'single_with' as with_page %}
+    
     <nav id="sidebar">
         <ul>
             <li>
-                <a href="{{ without_page }}" {% if 'without-emoji-and-emoticon' in request.path %}class="active"{% endif %}>
+                <a href="{{ without_page }}" {% if 'without-emoji-and-emoticon' in request.path or request.path == init_page %}class="active"{% endif %}>
                     <img class="menu-icon" src="{% static 'thesis_app/images/menu_text.png' %}" />
                     <div class="icon-text">Analyze Game Review<br />Without Emoji and Emoticon</div>
                 </a>
@@ -41,7 +43,7 @@
     <nav id="topbar">
         <ul>
             <li>
-                <a href="{{ without_page }}" {% if 'without-emoji-and-emoticon' in request.path %}class="active"{% endif %}>
+                <a href="{{ without_page }}" {% if 'without-emoji-and-emoticon' in request.path or request.path == init_page %}class="active"{% endif %}>
                     <img class="menu-icon" src="{% static 'thesis_app/images/menu_text.png' %}" />
                     <div class="icon-text">Without Emoji and Emoticon</div>
                 </a>
