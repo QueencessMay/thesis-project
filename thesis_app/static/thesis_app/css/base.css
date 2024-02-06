@@ -55,7 +55,9 @@ body {
     overflow: hidden;
 }
 .wrapper__bg {
-    position: absolute;
+    position: fixed;
+    top: 0;
+    left: 0;
     height: 100%;
     width: 100%;
     background: url('../images/bg-pattern.png');
@@ -151,9 +153,17 @@ body {
 }
 
 @media (max-width: 768px) {
+    body {
+        display: flex;
+        height: 100vh;
+        flex-direction: column;
+        overflow: hidden;
+    }
     .wrapper {
-        min-height: 100vh;
-        overflow-y: visible;
+        flex: 1;
+        align-items: flex-start;
+        padding: 1.5rem;
+        overflow-y: auto;
     }
     #sidebar {
         display: none;

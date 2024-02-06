@@ -251,10 +251,14 @@ label {
 /* Styles for Smaller Screens */
 
 @media (max-width: 768px) {
-    .container--uploader,
+    .container--uploader {
+        padding: 5vw;
+        width: 100%;
+        margin: auto;
+    }
     .container--result {
-        padding: 7vw 5vw;
-        width: 85%;
+        padding: 5vw;
+        width: 100%;
     }
     label {
         font: 1.75rem/1 Bungee, sans-serif;
@@ -279,9 +283,13 @@ label {
         width: 100%;
     }
     .result__content {
+        height: max-content;
         flex-direction: column;
     }
 
+    .table__wrapper {
+        max-height: 70vh;
+    }
     .result__table td:last-child {
         vertical-align: baseline;
     }
