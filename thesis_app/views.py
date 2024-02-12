@@ -25,10 +25,10 @@ Data structures, algorithms, and control:
   - Lists for storing game review data and sentiments.
 - Algorithms:
   - Sentiment analysis using the DistilBERT model
-  - Functions for analyzing single and multiple game reviews.
   - Batch processing of game reviews for efficiency.
 - Control:
   - Django views for handling user requests and rendering templates.
+  - Session management is utilized to store and retrieve data across different views.
   - Conditional statements and exception handling to manage the flow of execution and handle errors effectively.
 """
 
