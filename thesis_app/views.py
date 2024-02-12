@@ -42,6 +42,7 @@ from django.http import HttpResponse, HttpResponseServerError
 from .forms import CSVForm
 from .preprocessing import preprocess
 
+
 # Views for one game review with or without emojis and emoticons
 
 """
@@ -93,26 +94,19 @@ def view_single_with(request):
         return render(request, 'thesis_app/single-with.html')
 
 """
-Analyze a single game review using the specified model.
-@params input (str) game review, model (DistilBERT) 
-@return sentiment (int) label for the game review 
+View for redirecting to the single game review analysis page.
+@param request (HttpRequest) object
+@return rendered HTML template for single review analysis
 """
-def analyze_single(input, model):
-  if not input:
-    return -1
-  
-  tokenizer = apps.get_app_config('thesis_app').tokenizer
-  inputs = tokenizer(input, return_tensors="tf")
-  outputs = model(inputs)
-  sentiment = tf.argmax(outputs.logits, axis=1).numpy()[0]
+def view_home(request):
+  return view_single_without(request)
 
-  return sentiment
 
 # Views for multiple game reviews with or without emojis and emoticons
 
 """
 View for analyzing multiple game reviews.
-@params request (HttpRequest) object containing user input, option (str) analysis option 
+@params request (HttpRequest) object containing user input, option (str) string captured from the URL representing the analysis option 
 @return rendered HTML template with form for uploading CSV file
 """
 def view_multi(request, option):
@@ -129,7 +123,6 @@ def view_multi(request, option):
                 )
 
                 review_type = 'with' 
-                    
                 file_output = analyze_file(file_input, model, review_type)
 
                 request.session['model'] = "With Emoji and Emoticon" if option == "with-emoji-and-emoticon" else "Without Emoji and Emoticon"
@@ -148,8 +141,8 @@ def view_multi(request, option):
     return render(request, "thesis_app/multi.html", context)
 
 """
-View for displaying results of multiple game review analysis.
-@params request (HttpRequest) object containing session data, option (str) analysis option 
+View for displaying results of multiple game reviews analysis.
+@params request (HttpRequest) object containing session data, option (str) string captured from the URL representing the analysis option
 @return rendered HTML template with analysis results
 """
 def view_multi_result(request, option):
@@ -170,7 +163,7 @@ def view_multi_result(request, option):
 
 """
 View for downloading analysis results as a CSV file.
-@params request (HttpRequest) object containing session data, option (str) analysis option 
+@params request (HttpRequest) object containing session data, option (str) string captured from the URL representing the analysis option
 @return csv file download response
 """
 def download_result(request, option):
@@ -182,31 +175,28 @@ def download_result(request, option):
     except Exception as e:
         return HttpResponseServerError(f"An error occurred during downloading the result: {str(e)}")
 
+
 # Helper functions
 
 """
-Generate a CSV file from analysis results data.
-@params data (list) list of dictionaries, filename (str) name of the CSV file
-@return csv file download response
+Analyze a single game review using the specified model.
+@params input (str) game review, model (DistilBERT) 
+@return sentiment (int) label for the game review 
 """
-def generate_csv(data, filename):
-    try:
-        response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = f'attachment; filename="{filename}"'
+def analyze_single(input, model):
+  if not input:
+    return -1
+  
+  tokenizer = apps.get_app_config('thesis_app').tokenizer
+  inputs = tokenizer(input, return_tensors="tf")
+  outputs = model(inputs)
+  sentiment = tf.argmax(outputs.logits, axis=1).numpy()[0]
 
-        writer = csv.writer(response)
-        writer.writerow(['Review', 'Sentiment'])
-
-        for row in data:
-            writer.writerow([row['review'], row['sentiment']])
-
-        return response
-    except Exception as e:
-        return HttpResponseServerError(f"An error occurred during CSV generation: {str(e)}")
+  return sentiment
 
 """
 Analyzes multiple game reviews from a CSV file.
-@params file (CSV file) containing game reviews, model (DistilBERT), review_type (str) review type
+@params file (CSV file) containing game reviews, model (DistilBERT), review_type (str) type of game review
 @return dictionary containing analysis results
 """
 def analyze_file(file, model, review_type):
@@ -235,8 +225,8 @@ def analyze_file(file, model, review_type):
         return HttpResponseServerError(f"An error occurred during file analysis: {str(e)}")
 
 """
-Analyzes multiple game reviews using specified model.
-@params reviews (list) a list the game reviews, model (DistilBERT)
+Analyzes multiple game reviews using the specified model.
+@params reviews (list) list of processed game reviews, model (DistilBERT)
 @return sentiments (list) sentiment labels for each game review     
 """
 def analyze_batch(reviews, model):
@@ -250,9 +240,21 @@ def analyze_batch(reviews, model):
         return HttpResponseServerError(f"An error occurred during batch analysis: {str(e)}")
 
 """
-View for redirecting to the single game review analysis page.
-@param request (HttpRequest) object
-@return rendered HTML template for single review analysis
+Generate a CSV file from analysis results data.
+@params data (list) list of analysis results, filename (str) name of the CSV file
+@return csv file download response
 """
-def home(request):
-  return view_single_without(request)
+def generate_csv(data, filename):
+    try:
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = f'attachment; filename="{filename}"'
+
+        writer = csv.writer(response)
+        writer.writerow(['Review', 'Sentiment'])
+
+        for row in data:
+            writer.writerow([row['review'], row['sentiment']])
+
+        return response
+    except Exception as e:
+        return HttpResponseServerError(f"An error occurred during CSV generation: {str(e)}")
