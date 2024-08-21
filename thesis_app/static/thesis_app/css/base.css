@@ -61,6 +61,7 @@ body {
     height: 100%;
     width: 100%;
     background: url('../images/bg-pattern.png');
+    background-size: contain;
     opacity: 0.15;
 }
 
