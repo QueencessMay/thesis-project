@@ -1,5 +1,5 @@
 
-# Game Reviews Sentiment Analyzer
+# EmoGameLens: An AI Platform for Analyzing Game Sentiments
 ![Homepage](./thesis_app/static/thesis_app/images/homepage.png)
 
 A web application for analyzing the sentiment of game reviews.
